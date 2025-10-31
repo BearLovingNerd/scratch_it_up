@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dia_outro",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dia_outro",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

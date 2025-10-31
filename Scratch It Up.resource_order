@@ -1,0 +1,18 @@
+{
+  "FolderOrderSettings":[],
+  "ResourceOrderSettings":[
+    {"name":"obj_cell","order":1,"path":"objects/obj_cell/obj_cell.yy",},
+    {"name":"obj_player","order":4,"path":"objects/obj_player/obj_player.yy",},
+    {"name":"obj_scene_manager","order":6,"path":"objects/obj_scene_manager/obj_scene_manager.yy",},
+    {"name":"obj_sprite","order":5,"path":"objects/obj_sprite/obj_sprite.yy",},
+    {"name":"obj_typer","order":3,"path":"objects/obj_typer/obj_typer.yy",},
+    {"name":"rm_card","order":2,"path":"rooms/rm_card/rm_card.yy",},
+    {"name":"rm_home","order":1,"path":"rooms/rm_home/rm_home.yy",},
+    {"name":"dia_outro","order":2,"path":"scripts/dia_outro/dia_outro.yy",},
+    {"name":"scr_scene_manage","order":1,"path":"scripts/scr_scene_manage/scr_scene_manage.yy",},
+    {"name":"spr_cell","order":1,"path":"sprites/spr_cell/spr_cell.yy",},
+    {"name":"spr_girl","order":3,"path":"sprites/spr_girl/spr_girl.yy",},
+    {"name":"spr_home_bg","order":4,"path":"sprites/spr_home_bg/spr_home_bg.yy",},
+    {"name":"spr_kitty","order":2,"path":"sprites/spr_kitty/spr_kitty.yy",},
+  ],
+}
