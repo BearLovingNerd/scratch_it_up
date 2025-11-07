@@ -3,7 +3,8 @@ image_speed = 0;
 revealed = false;	// Not revealed
 my_index = 1;		// The sprite to be revealed
 my_type = 0;
-coord = [0][0]
+coord = [0][0];
+neighbor_counted = false;
 
 function on_reveal() {
 	
@@ -17,7 +18,10 @@ function on_reveal() {
 		obj_card.bombs ++
 		if obj_card.bombs == 2
 			show_message("Looooserrrr")
+			
+			//obj card end function
 	}
+
 }
 
 function check_score() {
@@ -37,5 +41,6 @@ function check_score() {
 		obj_card.bombs ++
 		if obj_card.bombs == 2
 			show_message("You Fucking Suck")
+			//obj card end function
 	}
 }

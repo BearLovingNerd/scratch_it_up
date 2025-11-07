@@ -2,18 +2,18 @@ randomize()
 bombs = 0
 
 var cell_chance = []
-repeat(4){
+repeat(3){
 	array_insert(cell_chance, 0, "double")
 }
-repeat(4){
+repeat(3){
 	array_insert(cell_chance, 0, "triple")
 }
 repeat(4){
-	array_insert(cell_chance, 0, "neigh")
+	array_insert(cell_chance, 0, "n")
 }
-repeat(4){
+/*repeat(4){
 	array_insert(cell_chance, 0, "anti")
-}
+}*/
 repeat(3){
 	array_insert(cell_chance, 0, "free")
 }
@@ -73,7 +73,7 @@ with obj_cell{
 			my_index = 3
 	}
 	
-if cordx != 5 {
+	if cordx != 5 {
 		var check = obj_card.grid[cordx + 1][cordy]
 		if check.my_type == "bomb"
 			my_index = 3
@@ -94,6 +94,76 @@ if cordx != 5 {
 	if my_type == "bomb"
 		my_index = 2
 }
+function triggerGameEnd(){
+	
+	//count neighbors
+	var neighborScore = 0;
+	
+	for (var i = 0; i < 6; i++){
+		for (var j = 0; j < 6; j++){
+			var current = grid[i][j]
+			if(validNeigh(current)){
+				var tally = countNeighs(current);
+				show_debug_message("Neighbor group count: " + string(tally))
+				neighborScore += (tally*(tally+1))/2;//this calculation makes the sequence 1,2,3,4... into 1,3,6,10... (scoring of neighbors)
+			}
+		}
+	}
+	show_message("Neighbor score = " + string(neighborScore));
+	
+	
+	
+	//count antineighbors
+	//check all adjacent/diagonal cells. if no antineighbor, increase score
+	//if antineighbor, mark both cells as no points. check all neighbors!!!
+	
+	
+	//make ure first scratch isnt bomb
+	//cash out button
+	
+	//three scratch cards
+	
+	//start simple w cards??
+}
+
+function countNeighs(cell){//perform depth first search when encountering an unmarked neighbor. gives one point for each neighbor in group
+	cell.neighbor_counted = true;
+	var count = 0;
+	if(cell.cordx!=0){//check upwards
+		var toCheck = grid[cell.cordx-1][cell.cordy];
+		if(validNeigh(toCheck)){
+			toCheck.neighbor_counted = true;
+			count += countNeighs(toCheck);
+		}
+	}
+	if(cell.cordx!=5){//check down
+		var toCheck = grid[cell.cordx+1][cell.cordy];
+		if(validNeigh(toCheck)){
+			toCheck.neighbor_counted = true;
+			count += countNeighs(toCheck);
+		}
+	}
+	if(cell.cordy!=0){//check left
+		var toCheck = grid[cell.cordx][cell.cordy-1];
+		if(validNeigh(toCheck)){
+			toCheck.neighbor_counted = true;
+			count+= countNeighs(toCheck);
+		}
+	}
+	if(cell.cordy!=5){//check right
+		var toCheck = grid[cell.cordx][cell.cordy+1];
+		if(validNeigh(toCheck)){
+			toCheck.neighbor_counted = true;
+			count+= countNeighs(toCheck);
+		}
+	}
+	
+	return 1 + count;
+}
+function validNeigh(cell){
+	return cell.my_type == "n" && !cell.neighbor_counted;
+}
+
 
 // Establish Vars
 pair = 0;

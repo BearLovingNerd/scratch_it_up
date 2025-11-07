@@ -41,6 +41,7 @@
     {"id":{"name":"obj_scene_manager","path":"objects/obj_scene_manager/obj_scene_manager.yy",},},
     {"id":{"name":"obj_sprite","path":"objects/obj_sprite/obj_sprite.yy",},},
     {"id":{"name":"obj_typer","path":"objects/obj_typer/obj_typer.yy",},},
+    {"id":{"name":"uiText","path":"objects/uiText/uiText.yy",},},
     {"id":{"name":"rm_card","path":"rooms/rm_card/rm_card.yy",},},
     {"id":{"name":"rm_home","path":"rooms/rm_home/rm_home.yy",},},
     {"id":{"name":"dia_intro","path":"scripts/dia_intro/dia_intro.yy",},},
@@ -55,8 +56,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rm_home","path":"rooms/rm_home/rm_home.yy",},},
     {"roomId":{"name":"rm_card","path":"rooms/rm_card/rm_card.yy",},},
+    {"roomId":{"name":"rm_home","path":"rooms/rm_home/rm_home.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[
