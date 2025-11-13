@@ -1,20 +1,28 @@
 randomize()
-bombs = 0
+bombs = 0;
+
+//Establish Vars
+double = 0;
+triple = 0;
+neighbor = 0;
+anti = 0;
+free = 0;
+reveals = 0;
 
 var cell_chance = []
-repeat(3){
+repeat(2){
 	array_insert(cell_chance, 0, "double")
 }
-repeat(3){
+repeat(2){
 	array_insert(cell_chance, 0, "triple")
 }
-repeat(4){
-	array_insert(cell_chance, 0, "n")
+repeat(2){
+	array_insert(cell_chance, 0, "neighb")
 }
-/*repeat(4){
+repeat(2){
 	array_insert(cell_chance, 0, "anti")
-}*/
-repeat(3){
+}
+repeat(2){
 	array_insert(cell_chance, 0, "free")
 }
 
@@ -44,6 +52,7 @@ grid = [
 ]
 
 // Create Cells
+
 for (var i = 0; i < 6; i++){
 	
 	for (var j = 0; j < 6; j++){
@@ -64,53 +73,76 @@ for (var i = 0; i < 6; i++){
 		array_delete(final_selection, random_selection, 1)
 	}
 }
-
-with obj_cell{
+function colorTiles(){
+	with obj_cell{
+		my_index = 1
 	
-	if cordx != 0 {
-		var check = obj_card.grid[cordx - 1][cordy]
-		if check.my_type == "bomb"
-			my_index = 3
+		if cordx != 0 {
+			var check = obj_card.grid[cordx - 1][cordy]
+			if check.my_type == "bomb"
+				my_index = 3
+		}
+	
+		if cordx != 5 {
+			var check = obj_card.grid[cordx + 1][cordy]
+			if check.my_type == "bomb"
+				my_index = 3
+		}
+	
+		if cordy != 0 {
+			var check = obj_card.grid[cordx][cordy - 1]
+			if check.my_type == "bomb"
+				my_index = 3	
+		}
+	
+		if cordy != 5 {
+			var check = obj_card.grid[cordx][cordy + 1]
+			if check.my_type == "bomb"
+				my_index = 3	
+		}
+	
+		if my_type == "bomb"
+			my_index = 2
 	}
-	
-	if cordx != 5 {
-		var check = obj_card.grid[cordx + 1][cordy]
-		if check.my_type == "bomb"
-			my_index = 3
-	}
-	
-	if cordy != 0 {
-		var check = obj_card.grid[cordx][cordy - 1]
-		if check.my_type == "bomb"
-			my_index = 3	
-	}
-	
-	if cordy != 5 {
-		var check = obj_card.grid[cordx][cordy + 1]
-		if check.my_type == "bomb"
-			my_index = 3	
-	}
-	
-	if my_type == "bomb"
-		my_index = 2
 }
+colorTiles();
 function triggerGameEnd(){
-	
+	//count pairs and triples
+	var pairScore = floor(double/2)*3
+	var tripleScore = floor(triple/3)*7
 	//count neighbors
 	var neighborScore = 0;
+	//count antineighbors
+	var antiScore = 0;  //score 5 per isolated antineighbor
 	
 	for (var i = 0; i < 6; i++){
 		for (var j = 0; j < 6; j++){
 			var current = grid[i][j]
 			if(validNeigh(current)){
 				var tally = countNeighs(current);
-				show_debug_message("Neighbor group count: " + string(tally))
+				show_debug_message("Neighbor group count: " + string(tally));
 				neighborScore += (tally*(tally+1))/2;//this calculation makes the sequence 1,2,3,4... into 1,3,6,10... (scoring of neighbors)
 			}
+			if(validAnti(current)){
+				current.antineighbor_counted = true;
+				foundAnti = false;
+				for (var k = i-1; k < i+2 && k<6; k++){
+					for (var l = i-1; l < i+2 && l<6; l++){
+						if(validAnti(grid[abs(k)][abs(l)])){
+							grid[abs(k)][abs(l)].antineighbor_counted = true;
+							foundAnti = true;
+						}
+					}
+				}
+				if(!foundAnti){
+					antiScore += 5;
+				}
+			}
+		
 		}
 	}
-	show_message("Neighbor score = " + string(neighborScore));
-	
+	money_counter.changeDisplayText("Neighbor score = " + string(neighborScore) + " Pair Score = " + string(pairScore) + "\n Triple score = " + string(tripleScore) + " Free tile score = " + string(free))
+	//show_message("anti score = " + string(antiScore))
 	
 	
 	//count antineighbors
@@ -161,13 +193,9 @@ function countNeighs(cell){//perform depth first search when encountering an unm
 	return 1 + count;
 }
 function validNeigh(cell){
-	return cell.my_type == "n" && !cell.neighbor_counted;
+	return cell.revealed && cell.my_type == "neighb" && !cell.neighbor_counted;
+}
+function validAnti(cell){
+	return cell.revealed && cell.my_type == "anti" && !cell.antineighbor_counted;
 }
 
-
-// Establish Vars
-pair = 0;
-triple = 0;
-neighbor = 0;
-anti = 0;
-free = 0;

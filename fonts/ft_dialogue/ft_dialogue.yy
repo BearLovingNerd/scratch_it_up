@@ -128,7 +128,10 @@
   "sdfSpread":8,
   "size":18.0,
   "styleName":"Regular",
-  "textureGroupId":null,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
   "TTFName":"C:\\Users\\Bobby\\GameMakerProjects\\scratch_it_up\\fonts\\ft_dialogue\\square_block.ttf",
   "usesSDF":false,
 }

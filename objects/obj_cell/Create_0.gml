@@ -5,6 +5,8 @@ my_index = 1;		// The sprite to be revealed
 my_type = 0;
 coord = [0][0];
 neighbor_counted = false;
+antineighbor_counted = false;
+
 
 function on_reveal() {
 	
@@ -14,17 +16,20 @@ function on_reveal() {
 	
 	image_index = my_index;
 	revealed = true;
-	if my_type == "bomb" {
+	obj_card.reveals++;
+	/*if my_type == "bomb" {
 		obj_card.bombs ++
-		if obj_card.bombs == 2
+		if obj_card.bombs == 2{
 			show_message("Looooserrrr")
+		}
 			
 			//obj card end function
-	}
+	}*/
 
 }
 
 function check_score() {
+	show_debug_message("bombs " + string(obj_card.bombs))
 	if my_type == "double" {
 		obj_card.double ++
 	}
@@ -34,13 +39,22 @@ function check_score() {
 	}
 	
 	if my_type == "free" {
-		obj_card.free += 5
+		obj_card.free += 1
 	}
 	
 	if my_type == "bomb" {
-		obj_card.bombs ++
-		if obj_card.bombs == 2
-			show_message("You Fucking Suck")
+		if(obj_card.reveals==0){
+			my_type = "free";
+			obj_card.colorTiles();
+			show_debug_message("FIRST SCRATCH BOMB AVERTED");
+		}
+		else{
+			obj_card.bombs ++
+			if obj_card.bombs == 2{
+				show_message("You Fucking Suck")
+				obj_card.triggerGameEnd();
 			//obj card end function
+			}
+		}
 	}
 }

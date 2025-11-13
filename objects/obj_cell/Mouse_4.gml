@@ -1,1 +1,4 @@
-on_reveal()
+if(!revealed){
+	check_score()
+	on_reveal()
+}
