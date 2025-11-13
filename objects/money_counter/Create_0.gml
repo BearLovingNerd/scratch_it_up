@@ -1,4 +1,4 @@
-displayText = "cash out"
+displayText = "info text here"
 
 image_speed = 0
 image_index = 4

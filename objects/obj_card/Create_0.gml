@@ -10,19 +10,19 @@ free = 0;
 reveals = 0;
 
 var cell_chance = []
-repeat(2){
+repeat(4){
 	array_insert(cell_chance, 0, "double")
 }
-repeat(2){
+repeat(4){
 	array_insert(cell_chance, 0, "triple")
 }
-repeat(2){
+repeat(4){
 	array_insert(cell_chance, 0, "neighb")
 }
-repeat(2){
+repeat(4){
 	array_insert(cell_chance, 0, "anti")
 }
-repeat(2){
+repeat(5){
 	array_insert(cell_chance, 0, "free")
 }
 

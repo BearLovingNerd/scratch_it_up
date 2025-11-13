@@ -50,6 +50,7 @@ function check_score() {
 		}
 		else{
 			obj_card.bombs ++
+			money_counter.changeDisplayText("Bombs scratched: " + string(obj_card.bombs))
 			if obj_card.bombs == 2{
 				show_message("You Fucking Suck")
 				obj_card.triggerGameEnd();
